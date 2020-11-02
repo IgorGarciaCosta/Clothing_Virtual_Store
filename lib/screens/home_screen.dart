@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja_three/tabs/home_tabs.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -8,8 +9,7 @@ class HomeScreen extends StatelessWidget {
     return PageView(//coloco as telas aqui dentro
       physics:NeverScrollableScrollPhysics() ,//faz as telas são serem arrastáveis
       children: <Widget>[
-        Container(color: Colors.yellow,),
-        Container(color: Colors.red,)
+        HomeTab()
       ],
     );
   }
