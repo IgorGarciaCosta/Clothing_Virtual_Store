@@ -1,21 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_three/tiles/category_tile.dart';
+import 'package:loja_three/tiles/category_tile.dart';
 
 class GenreTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
       future: Firestore.instance.collection("generos").getDocuments(),
-      builder: (context, snapshot){
-        if(!snapshot.hasData){
-          return Center(child: CircularProgressIndicator(),);
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          var dividedTiles = ListTile
+              .divideTiles(//pede pra dividir as tiles
+                  //passa todas as tiles
+                  tiles: snapshot.data.documents.map((doc) {
+                    return CategoryTile(doc);
+                  }).toList(),
+                  color: Colors.grey[500])//cor do divisor
+              .toList();//transforma em lista
 
-        }
-        else{
           return ListView(
-            children: <Widget>[
-
-            ],
+            children: dividedTiles,//coloca a lista feita na lista view
           );
         }
       },
