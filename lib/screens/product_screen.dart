@@ -1,4 +1,6 @@
+
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_three/datas/genre_data.dart';
 
@@ -14,6 +16,8 @@ class _ProductScreenState extends State<ProductScreen> {
   //essas duas linhas servem pra evitar isar "widget.product" e usar
   //apenas "product"
   final GenreData product;
+
+  bool avaliacao = true;
   _ProductScreenState(this.product);
 
   @override
@@ -58,7 +62,83 @@ class _ProductScreenState extends State<ProductScreen> {
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,
                           color: primaryColor
-                        ),)
+                        ),
+                  ),
+                  SizedBox(height: 25.0,),
+                  Text(//número de eps
+                    "Número de episódios: ${product.size}",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                  SizedBox(height: 25.0,),
+
+                  Text(//descrição
+                    "Descrição:",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500
+                    ),
+                  ),
+
+                  Text(
+                    product.description,
+                    style: TextStyle(
+                      fontSize: 16.0
+                    ),
+                  ),
+
+                  SizedBox(height: 40.0,),
+
+                  SizedBox(//botão de favoritar
+                    height: 44.0,
+
+                    child: avaliacao?
+                      RaisedButton(
+                        onPressed: (){
+                          setState(() {
+                            avaliacao = !avaliacao;
+                            //product.fav = avaliacao;
+                            print(avaliacao);
+                          });
+                        },
+
+                        child:
+                              Text("Adicionar aos Favoritos",
+                                  style: TextStyle(fontSize: 18.0),),
+
+
+                        color: primaryColor,
+                        textColor: Colors.white,
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)
+                        ),
+
+                    )
+                        :
+                     RaisedButton(
+                       onPressed: (){
+                         setState(() {
+                           avaliacao = !avaliacao;
+                           //product.fav = avaliacao;
+                           print(avaliacao);
+                         });
+                       },
+
+                       child:
+                       Text("Favorito",
+                         style: TextStyle(fontSize: 18.0),),
+
+
+                       color: Color(0XFF3eb54e),
+                       textColor: Colors.white,
+                       shape: new RoundedRectangleBorder(
+                           borderRadius: new BorderRadius.circular(30.0)
+                       ),
+
+                     ),
+                  ),
                 ],
               ),
           )
