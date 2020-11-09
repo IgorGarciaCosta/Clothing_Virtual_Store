@@ -17,7 +17,7 @@ class _ProductScreenState extends State<ProductScreen> {
   //apenas "product"
   final GenreData product;
 
-  bool avaliacao = true;
+  bool avaliacao = false;
   _ProductScreenState(this.product);
 
   @override
