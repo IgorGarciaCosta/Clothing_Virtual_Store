@@ -40,12 +40,21 @@ class UserModel extends Model{
 
   }
 
+  void signOut() async{
+    await _auth.signOut();
+
+    userData = Map();
+    firebaseUser = null;
+
+    notifyListeners();
+  }
+
   void recoverPassword(){
 
   }
 
   bool isLoggedIn(){
-
+      return firebaseUser != null;//indica usuario logado
   }
 
   //só essa função tem "_" pq apenas ela não pode ser
