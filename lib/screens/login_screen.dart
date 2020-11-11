@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_three/models/user_models.dart';
 import 'package:loja_three/screens/signup_screen.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -29,22 +31,27 @@ class LoginScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Form(//valida campos
-          key: _formKey,
-          child: ListView(//bom usar listView pq pode ser que algo importante seja coberto pelo teclado
+      body: ScopedModelDescendant<UserModel>(
+        builder: (context, child, model){
+          if(model.isLoading){
+            return Center(child: CircularProgressIndicator(),);
+          }
+          return Form(//valida campos
+            key: _formKey,
+            child: ListView(//bom usar listView pq pode ser que algo importante seja coberto pelo teclado
               padding: EdgeInsets.all(16.0),
               children: <Widget>[
-                 TextFormField(
-                   decoration: InputDecoration(
-                     hintText: "Email"
-                   ),
-                   keyboardType: TextInputType.emailAddress,//já aparece o @ no teclado
-                   validator: (text){
-                     if(text.isEmpty || !text.contains("@")){
-                       return "Email Invalido";
-                     }
-                   },
-                 ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "Email"
+                  ),
+                  keyboardType: TextInputType.emailAddress,//já aparece o @ no teclado
+                  validator: (text){
+                    if(text.isEmpty || !text.contains("@")){
+                      return "Email Invalido";
+                    }
+                  },
+                ),
                 SizedBox(height: 16.0,),
                 TextFormField(
                   decoration: InputDecoration(
@@ -60,8 +67,8 @@ class LoginScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: FlatButton(
-                      onPressed: (){},
-                      child: Text("Esqueci minha senha",
+                    onPressed: (){},
+                    child: Text("Esqueci minha senha",
                       textAlign: TextAlign.right,),
                     padding: EdgeInsets.zero,
                   ),
@@ -79,14 +86,17 @@ class LoginScreen extends StatelessWidget {
                     textColor: Colors.white,
                     color: Theme.of(context).primaryColor,
                     onPressed: (){
-                        if(_formKey.currentState.validate()){
+                      if(_formKey.currentState.validate()){
 
-                        }
+                      }
                     },
                   ),
                 ),
               ],
-          ),
+            ),
+          );
+        },
+
       ),
     );
   }
