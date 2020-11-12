@@ -76,8 +76,8 @@ class UserModel extends Model{
     notifyListeners();
   }
 
-  void recoverPassword(){
-
+  void recoverPassword(String email){
+    _auth.sendPasswordResetEmail(email: email);
   }
 
   bool isLoggedIn(){
