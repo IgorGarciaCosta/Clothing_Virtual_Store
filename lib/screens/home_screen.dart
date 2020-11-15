@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loja_three/tabs/genre_tab.dart';
 import 'package:loja_three/tabs/home_tabs.dart';
 import 'package:loja_three/widgets/custom_drawer.dart';
+import 'package:loja_three/widgets/fav_button.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
         Scaffold(
           body: HomeTab(),
           drawer: CustomDrawer(_pageController),
+          floatingActionButton: FavButton(),
         ),
         Scaffold(
           appBar: AppBar(
@@ -23,6 +25,7 @@ class HomeScreen extends StatelessWidget {
           ),
           drawer:CustomDrawer(_pageController) ,
           body: GenreTab(),
+          floatingActionButton: FavButton(),
         ),
       ],
     );

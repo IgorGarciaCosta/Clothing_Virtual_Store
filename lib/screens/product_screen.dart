@@ -2,7 +2,14 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_three/datas/fav_products.dart';
 import 'package:loja_three/datas/genre_data.dart';
+import 'package:loja_three/models/fav_model.dart';
+import 'package:loja_three/models/user_models.dart';
+import 'package:loja_three/models/user_models.dart';
+import 'package:loja_three/screens/login_screen.dart';
+
+import 'fav_screen.dart';
 
 class ProductScreen extends StatefulWidget {
   final GenreData product;
@@ -17,7 +24,7 @@ class _ProductScreenState extends State<ProductScreen> {
   //apenas "product"
   final GenreData product;
 
-  bool avaliacao = false;
+  bool avaliacao = true;
   _ProductScreenState(this.product);
 
   @override
@@ -97,11 +104,36 @@ class _ProductScreenState extends State<ProductScreen> {
                     child: avaliacao?
                       RaisedButton(
                         onPressed: (){
-                          setState(() {
-                            avaliacao = !avaliacao;
-                            //product.fav = avaliacao;
-                            print(avaliacao);
-                          });
+
+                          //se estiver logado
+                          if(UserModel.of(context).isLoggedIn()){
+                            setState(() {
+                              avaliacao = !avaliacao;
+                              //product.fav = avaliacao;
+                              print(avaliacao);
+
+                              FavProducts favProduct = FavProducts();
+                              favProduct.productId = product.id;
+                              favProduct.category = product.category;
+
+                              FavModel.of(context).addFavItem(favProduct);
+
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context)=>FavScreen()
+                                  )
+                              );
+                            });
+                          }
+
+                          else{//se estiver deslogado
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context)=>LoginScreen()
+                              )
+                            );
+                          }
+
                         },
 
                         child:
@@ -119,11 +151,22 @@ class _ProductScreenState extends State<ProductScreen> {
                         :
                      RaisedButton(
                        onPressed: (){
-                         setState(() {
-                           avaliacao = !avaliacao;
-                           //product.fav = avaliacao;
-                           print(avaliacao);
-                         });
+                         //se estiver logado
+                         if(UserModel.of(context).isLoggedIn()){
+                           setState(() {
+                             avaliacao = !avaliacao;
+                             //product.fav = avaliacao;
+                             print(avaliacao);
+                           });
+                         }
+
+                         else{//se estiver deslogado
+                           Navigator.of(context).push(
+                               MaterialPageRoute(
+                                   builder: (context)=>LoginScreen()
+                               )
+                           );
+                         }
                        },
 
                        child:

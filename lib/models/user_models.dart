@@ -13,6 +13,12 @@ class UserModel extends Model{
   bool isLoading = false;
 
 
+  //serve pra usar o usermodel sem precisar
+  //de ScopedModelDescendent
+  static UserModel of(BuildContext context)=>
+      ScopedModel.of<UserModel>(context);
+
+
   @override
   void addListener(VoidCallback listener) {
     super.addListener(listener);

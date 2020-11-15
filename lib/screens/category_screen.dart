@@ -55,7 +55,9 @@ class CategoryScreen extends StatelessWidget {
                           childAspectRatio: 0.65),//núm de itens na horizintal
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index){
-                        return GenreTile("grid", GenreData.fromDocument(snapshot.data.documents[index]));
+                        GenreData data = GenreData.fromDocument(snapshot.data.documents[index]);
+                        data.category = this.snapshot.documentID;
+                        return GenreTile("grid", data);
                       }),
 
 
@@ -64,7 +66,9 @@ class CategoryScreen extends StatelessWidget {
                      padding: EdgeInsets.all(4.0),
                     itemCount: snapshot.data.documents.length,
                     itemBuilder: (context, index){
-                      return GenreTile("list", GenreData.fromDocument(snapshot.data.documents[index]));
+                      GenreData data = GenreData.fromDocument(snapshot.data.documents[index]);
+                      data.category = this.snapshot.documentID;
+                      return GenreTile("list", data);
                     }
                   )
                 ],

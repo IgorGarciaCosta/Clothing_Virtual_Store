@@ -9,7 +9,6 @@ class GenreData{
   int year;
   int size;
   List images;
-  bool fav;
 
   GenreData.fromDocument(DocumentSnapshot snapshot){
     //convertendo os dados do documento nos dados da classe
@@ -19,6 +18,14 @@ class GenreData{
     year = snapshot.data["year"];
     images = snapshot.data["images"];
     size = snapshot.data["size"];
-    fav = snapshot.data["fav"];
+  }
+
+  Map<String, dynamic> toResumeMap(){
+    return{
+      "title":title,
+      "description": description,
+      "size": size,
+
+    };
   }
 }

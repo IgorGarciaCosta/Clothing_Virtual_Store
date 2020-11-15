@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       }
 
-                      else{//caso o email estaja preenchido
+                      else{//caso o email esteja preenchido
                         model.recoverPassword(_emailController.text);
                         _scaffoldKey.currentState.showSnackBar(
                             SnackBar(
