@@ -10,6 +10,8 @@ class FavModel extends Model{
 
   List<FavProducts>products = [];
 
+  bool isLoading = false;
+
   FavModel(this.user);//faz o favModel ter acesso aos usuários
 
 

@@ -5,7 +5,7 @@ class FavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      child: Icon(Icons.star, color:Colors.white),
+      child: Icon(Icons.favorite, color:Colors.white),
       onPressed: (){
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context)=>FavScreen())
