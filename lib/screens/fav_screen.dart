@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:loja_three/models/fav_model.dart';
 import 'package:loja_three/models/user_models.dart';
 import 'package:loja_three/screens/login_screen.dart';
+import 'package:loja_three/tiles/fav_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class FavScreen extends StatelessWidget {
@@ -82,6 +83,27 @@ class FavScreen extends StatelessWidget {
             );
 
           }
+
+
+          //se estiver logado e com itens
+          else{
+            return ListView(
+              children: <Widget>[
+                Column(//itens aqui dentro
+                  //mapeia os itens da lista
+                  children: model.products.map(
+                      (products){
+                        //FavTile é a área ocupada pelo item na lista
+                        return FavTile(products);
+                      }
+                  ).toList(),
+
+                ),
+              ],
+            );
+          }
+
+
         }
       ),
     );
