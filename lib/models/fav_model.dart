@@ -22,16 +22,34 @@ class FavModel extends Model{
       ScopedModel.of<FavModel>(context);
 
   void addFavItem(FavProducts favProducts){
-    products.add(favProducts);
+    int tamanho = products.length;
+    int repetidos = 0;
+    for (int i =0; i< tamanho; i++){
+      print(products[i].productId);
+      print(favProducts.productId);
 
-    Firestore.instance.collection("users").document(user.firebaseUser.uid)
-    .collection("fav").add(favProducts.toMap()).
-    then((doc){
-      favProducts.favoriteId = doc.documentID;//salva o id dado pelo firebase aqui
-    });
+      if(products[i].productId == favProducts.productId){
+        print("\n\niguais: ${products[i].productId} e ${favProducts.productId}");
+        repetidos++;
+        print("\nrepetiu aqui");
+      }
+    }
 
-    notifyListeners();
+    if(repetidos ==0){
+      print("\nnão houve reptidos");
+      products.add(favProducts);
+      Firestore.instance.collection("users").document(user.firebaseUser.uid)
+          .collection("fav").add(favProducts.toMap()).
+      then((doc){
+        favProducts.favoriteId = doc.documentID;//salva o id dado pelo firebase aqui
+      });
+      notifyListeners();
+    }
+
+
+
   }
+
   void removeFavItem(FavProducts favProducts){
     Firestore.instance.collection("users").document(user.firebaseUser.uid).
     collection("fav").document(favProducts.favoriteId).delete();
