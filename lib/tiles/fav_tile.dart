@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja_three/datas/fav_products.dart';
 import 'package:loja_three/datas/genre_data.dart';
+import 'package:loja_three/models/fav_model.dart';
 
 class FavTile extends StatelessWidget {
 
@@ -55,7 +56,7 @@ class FavTile extends StatelessWidget {
                           textColor: Colors.grey,
 
                           onPressed: (){
-
+                              FavModel.of(context).removeFavItem(favProducts);
                           },
                         )
                       ],

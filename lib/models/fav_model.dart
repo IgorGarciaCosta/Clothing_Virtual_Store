@@ -12,8 +12,10 @@ class FavModel extends Model{
 
   bool isLoading = false;
 
-  FavModel(this.user);//faz o favModel ter acesso aos usuários
-
+  FavModel(this.user) {//faz o favModel ter acesso aos usuários
+    if(user.isLoggedIn())
+      _loadFavItems();
+  }
 
   //feito pra acessar o favModel de qualquer lugar do app
   static FavModel of(BuildContext context)=>
@@ -36,6 +38,17 @@ class FavModel extends Model{
 
     products.remove(favProducts);
 
+    notifyListeners();
+  }
+
+  void _loadFavItems() async{
+    QuerySnapshot query = await Firestore.instance.collection("users").
+    document(user.firebaseUser.uid).collection("fav").getDocuments();
+
+    //transforma cada documento retornado do firebase
+    //em um FavProduct e retorna uma lista com todos esses
+    //FavProducts
+    products = query.documents.map((doc) => FavProducts.fromDocument(doc)).toList();
     notifyListeners();
   }
 }

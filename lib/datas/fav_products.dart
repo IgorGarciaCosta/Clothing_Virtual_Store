@@ -12,7 +12,7 @@ class FavProducts{
 
 
   //recebe todos os favoritos e transforma em um FavProduct no banco
-  FavProducts.fromDocuemnt(DocumentSnapshot document){
+  FavProducts.fromDocument(DocumentSnapshot document){
       favoriteId = document.documentID;
       category = document.data["category"];
       productId = document.data["productId"];
