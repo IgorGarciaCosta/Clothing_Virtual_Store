@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:loja_three/screens/category_screen.dart';
+import 'package:loja_three/screens/home_screen.dart';
+import 'package:loja_three/screens/tela_de_adicao.dart';
 
 class DrawerTile extends StatelessWidget {
   final IconData icon;
@@ -15,6 +18,14 @@ class DrawerTile extends StatelessWidget {
         onTap: (){
           Navigator.of(context).pop();//fecha o drawer antes de mudar a página
           controller.jumpToPage(page);
+          switch (page){
+            case 2:
+              break;
+
+            case 3:
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TelaDeAdicao()));
+              break;
+          }
         },
         child: Container(
           height: 60.0,
@@ -39,6 +50,7 @@ class DrawerTile extends StatelessWidget {
               ),
             ],
           ),
+
         ),
       ),
     );

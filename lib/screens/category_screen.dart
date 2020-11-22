@@ -42,7 +42,7 @@ class CategoryScreen extends StatelessWidget {
             else {
               return TabBarView(
                 physics:
-                    NeverScrollableScrollPhysics(), //impede de mudar entre frid e lista deslizando pro lado
+                    NeverScrollableScrollPhysics(), //impede de mudar entre grid e lista deslizando pro lado
                 //aqui dentro ficam o grid e a lista
                 children: [
                   //GRID

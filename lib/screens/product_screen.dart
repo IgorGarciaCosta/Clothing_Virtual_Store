@@ -23,12 +23,15 @@ class _ProductScreenState extends State<ProductScreen> {
   //essas duas linhas servem pra evitar isar "widget.product" e usar
   //apenas "product"
   final GenreData product;
+  FavProducts favProduct = FavProducts();
 
-  bool avaliacao = true;
+  bool avaliacao = false;
   _ProductScreenState(this.product);
+
 
   @override
   Widget build(BuildContext context) {
+    analisa();
     final Color primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
@@ -101,12 +104,13 @@ class _ProductScreenState extends State<ProductScreen> {
                   SizedBox(//botão de favoritar
                     height: 44.0,
 
-                    child: avaliacao?
+                    child: analisa()?
                       RaisedButton(
                         onPressed: (){
 
                           //se estiver logado
                           if(UserModel.of(context).isLoggedIn()){
+
                             setState(() {
                               avaliacao = !avaliacao;
                               //product.fav = avaliacao;
@@ -188,5 +192,14 @@ class _ProductScreenState extends State<ProductScreen> {
         ],
       ),
     );
+  }
+
+  bool analisa(){
+    if(favProduct.productId==product.id){
+      avaliacao = !avaliacao;
+      return avaliacao;
+    }
+    avaliacao = !avaliacao;
+    return avaliacao;
   }
 }
