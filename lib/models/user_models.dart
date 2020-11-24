@@ -7,6 +7,7 @@ class UserModel extends Model{
   //obs: Model é um objeto que guarda os estados de algo
   //nesse caso, os estados do login do app
 
+
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser firebaseUser;
   Map<String, dynamic> userData = Map();

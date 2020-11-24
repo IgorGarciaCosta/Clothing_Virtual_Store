@@ -36,7 +36,7 @@ class FavModel extends Model{
     }
 
     if(repetidos ==0){
-      print("\nnão houve reptidos");
+      print("\nnão houve repetidos");
       products.add(favProducts);
       Firestore.instance.collection("users").document(user.firebaseUser.uid)
           .collection("fav").add(favProducts.toMap()).
