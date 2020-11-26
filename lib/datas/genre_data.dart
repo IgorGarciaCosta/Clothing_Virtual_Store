@@ -8,7 +8,7 @@ class GenreData{
   String description;
   int year;
   int size;
-  List images;
+  String images;
 
   GenreData.fromDocument(DocumentSnapshot snapshot){
     //convertendo os dados do documento nos dados da classe

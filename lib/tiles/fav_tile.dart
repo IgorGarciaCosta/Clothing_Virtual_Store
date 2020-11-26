@@ -20,7 +20,7 @@ class FavTile extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               width: 120.0,
               child: Image.network(
-                favProducts.productData.images[0],
+                favProducts.productData.images,
                 fit: BoxFit.cover
               ),
             ),

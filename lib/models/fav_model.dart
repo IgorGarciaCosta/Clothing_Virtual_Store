@@ -21,12 +21,25 @@ class FavModel extends Model{
   static FavModel of(BuildContext context)=>
       ScopedModel.of<FavModel>(context);
 
+  bool checkIfIsFav(String id){//recebe o id do item aberto
+    int quantDeItens = products.length;
+
+    //varre alista de produtos
+    for(int i =0; i<quantDeItens; i++){
+      if(id == products[i].productId){//se achar um que ta nos fav
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   void addFavItem(FavProducts favProducts){
     int tamanho = products.length;
     int repetidos = 0;
     for (int i =0; i< tamanho; i++){
-      print(products[i].productId);
-      print(favProducts.productId);
+      //print(products[i].productId);
+      //print(favProducts.productId);
 
       if(products[i].productId == favProducts.productId){
         print("\n\niguais: ${products[i].productId} e ${favProducts.productId}");
@@ -35,7 +48,7 @@ class FavModel extends Model{
       }
     }
 
-    if(repetidos ==0){
+    if(repetidos == 0){
       print("\nnão houve repetidos");
       products.add(favProducts);
       Firestore.instance.collection("users").document(user.firebaseUser.uid)
@@ -45,8 +58,6 @@ class FavModel extends Model{
       });
       notifyListeners();
     }
-
-
 
   }
 

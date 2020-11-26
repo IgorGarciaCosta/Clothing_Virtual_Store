@@ -7,8 +7,10 @@ import 'package:loja_three/datas/genre_data.dart';
 import 'package:loja_three/models/fav_model.dart';
 import 'package:loja_three/models/user_models.dart';
 import 'package:loja_three/models/user_models.dart';
+import 'package:loja_three/screens/home_screen.dart';
 import 'package:loja_three/screens/login_screen.dart';
 
+import 'category_screen.dart';
 import 'fav_screen.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -37,22 +39,37 @@ class _ProductScreenState extends State<ProductScreen> {
       appBar: AppBar(
         title: Text(product.title),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.delete_outline,
+                color: Colors.white,
+              ),
+              onPressed: (){
+                Navigator.of(context).pop();
+              }
+
+          )
+        ],
+
       ),
       body: ListView(
         children: <Widget>[
           AspectRatio(
               aspectRatio: 0.9,
-              child: Carousel(
-                images: product.images.map((url){
-                  return NetworkImage(url);
-                }).toList(),
-                dotSize: 4.0,
-                dotSpacing: 15.0,
-                dotBgColor: Colors.transparent,
-                dotColor: primaryColor,
-                autoplay: false,//não muda as imagens automaticamente
+              child:
+                Image(image:NetworkImage(product.images)),
 
-              ),
+              //Carousel(
+                //images: product.images.map((url){
+                //  return NetworkImage(url);
+                //}).toList(),
+                //dotSize: 4.0,
+                //dotSpacing: 15.0,
+                //dotBgColor: Colors.transparent,
+                //dotColor: primaryColor,
+                //autoplay: false,//não muda as imagens automaticamente
+              //),
           ),
           Padding(
               padding: EdgeInsets.all(16.0),
@@ -195,11 +212,14 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   bool analisa(){
+
     if(favProduct.productId==product.id){
       avaliacao = !avaliacao;
       return avaliacao;
     }
-    avaliacao = !avaliacao;
+    //avaliacao = !avaliacao;
     return avaliacao;
   }
+
+
 }

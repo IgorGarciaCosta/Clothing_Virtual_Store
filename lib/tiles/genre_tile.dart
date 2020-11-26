@@ -23,7 +23,7 @@ class GenreTile extends StatelessWidget {
                   AspectRatio(
                     aspectRatio: 0.8,
                     child: Image.network(
-                      product.images[0],
+                      product.images,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -53,7 +53,7 @@ class GenreTile extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Image.network(
-                      product.images[0],
+                      product.images,
                       fit: BoxFit.cover,
                       height: 250.0,
                     ),
